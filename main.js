@@ -4,7 +4,7 @@
 
   /* reveal on scroll */
   var revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
-  if(reduced || !('IntersectionObserver' in window)){
+  if(!('IntersectionObserver' in window)){
     revealEls.forEach(function(el){ el.classList.add('in-view'); });
   } else {
     var io = new IntersectionObserver(function(entries){
@@ -35,6 +35,46 @@
         card.style.borderColor = '';
       });
     });
+  }
+
+  /* mobile menu */
+  var header = document.querySelector('header.nav');
+  var menuBtn = header.querySelector('.menu-btn');
+  function setMenu(open){
+    header.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuBtn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+  }
+  menuBtn.addEventListener('click', function(){ setMenu(!header.classList.contains('open')); });
+  header.querySelectorAll('nav.links a').forEach(function(a){
+    a.addEventListener('click', function(){ setMenu(false); });
+  });
+
+  /* stacked cards on touch: tap to bring forward, auto-cycle while visible */
+  var stackCards = Array.prototype.slice.call(document.querySelectorAll('.stack-card'));
+  if(!canHover && stackCards.length){
+    var order = [stackCards[2], stackCards[1], stackCards[0]];
+    var idx = -1, timer = null, userTook = false;
+    function activate(card){
+      stackCards.forEach(function(c){ c.classList.toggle('active', c === card); });
+    }
+    function step(){
+      idx = (idx + 1) % order.length;
+      activate(order[idx]);
+    }
+    function start(){ if(!timer && !userTook && !reduced){ step(); timer = setInterval(step, 2800); } }
+    function stop(){ clearInterval(timer); timer = null; }
+    stackCards.forEach(function(card){
+      card.addEventListener('click', function(){
+        userTook = true; stop();
+        activate(card.classList.contains('active') ? null : card);
+      });
+    });
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting) start(); else stop(); });
+      }, { threshold:0.3 }).observe(document.querySelector('.stack'));
+    }
   }
 
   /* reading progress + end-of-page highlight */

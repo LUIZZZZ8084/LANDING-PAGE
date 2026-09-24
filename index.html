@@ -98,8 +98,8 @@
   nav.links{display:flex;align-items:center;gap:32px;flex-wrap:wrap;font-size:14px;font-weight:600;letter-spacing:0.02em;}
   nav.links a{color:var(--text-2);}
   nav.links a:hover{color:var(--text);}
-  nav.links a.nav-cta{padding:11px 20px;border-radius:999px;background:var(--green-2);color:var(--bg);font-weight:700;white-space:nowrap;}
-  nav.links a.nav-cta:hover{background:var(--green-1);color:var(--bg);}
+  .nav-cta{padding:11px 20px;border-radius:999px;background:var(--green-2);color:var(--bg);font-size:14px;font-weight:700;letter-spacing:0.02em;white-space:nowrap;}
+  .nav-cta:hover{background:var(--green-1);color:var(--bg);}
 
   /* ---------- hero ---------- */
   .hero{
@@ -431,14 +431,109 @@
 
   :focus-visible{outline:2px solid var(--green-1);outline-offset:2px;}
 
+  /* ---------- mobile menu ---------- */
+  .nav-right{display:flex;align-items:center;gap:32px;}
+  .menu-btn{
+    display:none;width:42px;height:42px;border-radius:12px;flex:none;
+    border:1px solid var(--line-strong);background:transparent;color:var(--text);
+    align-items:center;justify-content:center;cursor:pointer;padding:0;
+  }
+  .menu-btn span,.menu-btn span::before,.menu-btn span::after{
+    display:block;width:18px;height:2px;border-radius:2px;background:currentColor;
+    position:relative;transition:transform .25s ease, background .25s ease;
+  }
+  .menu-btn span::before,.menu-btn span::after{content:'';position:absolute;left:0;}
+  .menu-btn span::before{top:-6px;}
+  .menu-btn span::after{top:6px;}
+  header.nav.open .menu-btn span{background:transparent;}
+  header.nav.open .menu-btn span::before{transform:translateY(6px) rotate(45deg);}
+  header.nav.open .menu-btn span::after{transform:translateY(-6px) rotate(-45deg);}
+
+  /* stacked cards: tap / auto-cycle state mirrors hover */
+  .stack-card.active{
+    transform:translate(var(--tx),var(--ty-h)) skewY(-8deg);
+    border-color:rgba(0,230,118,0.45);filter:none;z-index:10;
+  }
+  .touch-hint{display:none;justify-content:center;align-items:center;gap:8px;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-3);}
+  .touch-hint svg{animation:nudge 1.6s ease-in-out infinite;}
+  .swipe-hint{display:none;align-items:center;gap:8px;margin-top:6px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-3);}
+  .swipe-hint svg{animation:nudge 1.6s ease-in-out infinite;}
+  @keyframes nudge{0%,100%{transform:translateX(0);}50%{transform:translateX(5px);}}
+  @keyframes menuIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:none;}}
+
+  /* touch devices: tap feedback instead of mouse tilt */
+  @media (hover:none){
+    .tilt{transition:transform .15s ease, border-color .15s ease;}
+    .tilt:active{transform:scale(.98);border-color:rgba(0,230,118,0.35);}
+    .touch-hint{display:flex;}
+  }
+
   /* ---------- responsive (< 861px) ---------- */
   @media (max-width:860px){
-    nav.links a:not(.nav-cta){display:none;}
     .progress-side{display:none;}
+    .menu-btn{display:inline-flex;}
+    .nav-right{gap:10px;}
+    nav.links{display:none;}
+    header.nav.open nav.links{
+      display:flex;
+      position:absolute;left:0;right:0;top:100%;
+      flex-direction:column;align-items:stretch;gap:0;
+      background:var(--bg);border-bottom:1px solid var(--line);
+      box-shadow:0 24px 40px -20px rgba(0,0,0,0.8);
+      padding:8px 22px 18px;animation:menuIn .25s ease both;
+    }
+    header.nav.open nav.links a{display:block;padding:16px 4px;font-size:17px;border-bottom:1px solid var(--line);color:var(--text);}
+  }
+
+  /* ---------- phones ---------- */
+  @media (max-width:560px){
+    .hero-content{gap:28px;}
+    .hero-sub{font-size:16px;}
+    .bar-row{gap:16px;}
+    .hero-ctas{flex-direction:column;}
+    .hero-ctas a{text-align:center;padding:16px 20px;}
+    .metrics{gap:12px;padding-top:22px;}
+    .metrics .num{font-size:24px;}
+    .metrics .lbl{font-size:12px;}
+    .nav-cta{padding:10px 14px!important;font-size:13px;}
+    .brand-mark{height:30px;}
+    .brand-word{height:18px;}
+    .section-head,.section-head-narrow{margin-bottom:36px;gap:20px;}
+
+    .process{
+      display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+      margin-inline:-22px;padding:4px 22px 14px;scroll-padding-inline:22px;
+      scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    }
+    .process::-webkit-scrollbar{display:none;}
+    .process > *{flex:0 0 82%;scroll-snap-align:start;}
+    .step-n{font-size:64px;}
+    .swipe-hint{display:flex;}
+
+    .stack-wrap{padding:24px 0 150px;}
+    .crm-main{padding:8px;gap:6px;}
+    .crm-card{padding:5px 6px;}
+    .crm-kpis{gap:4px;}
+    .crm-kpi .k{font-size:6.5px;letter-spacing:0;}
+    .crm-kpi .v{font-size:11px;}
+    .crm-bottom{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:6px;}
+    .crm-lead{font-size:8px;gap:4px;}
+    .crm-lead .who{white-space:nowrap;min-width:0;overflow:hidden;}
+    .crm-lead .av{display:none;}
+    .crm-lead .st{padding:1px 5px;}
+  }
+
+  @media (max-width:400px){
+    .dg-node-box{width:46px;height:46px;border-radius:12px;}
+    .dg-node-box svg{width:20px;height:20px;}
+    .dg-node-label{top:52px;font-size:11px;}
+    .crm-kpi .k,.crm-lead .who{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   }
 
   @media (prefers-reduced-motion: reduce){
-    *{animation:none!important;transition:none!important;}
+    *{animation:none!important;}
+    .tilt,.stack-card{transition:none!important;}
+    .reveal,.reveal-stagger > *{transform:none!important;transition:opacity .6s ease!important;}
   }
 </style>
 </head>
@@ -463,14 +558,17 @@
       <img src="assets/palu-mark.png" alt="" class="brand-mark">
       <img src="assets/palu-word.png" alt="PALU" class="brand-word">
     </a>
-    <nav class="links">
-      <a href="#servicos">Serviços</a>
-      <a href="#processo">Processo</a>
-      <a href="#exemplos">Exemplos</a>
-      <a href="#projetos">LUPA</a>
-      <a href="#sobre">Sobre</a>
+    <div class="nav-right">
+      <nav class="links" id="site-menu">
+        <a href="#servicos">Serviços</a>
+        <a href="#processo">Processo</a>
+        <a href="#exemplos">Exemplos</a>
+        <a href="#projetos">LUPA</a>
+        <a href="#sobre">Sobre</a>
+      </nav>
       <a href="#contato" class="nav-cta">Iniciar projeto</a>
-    </nav>
+      <button class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-menu"><span></span></button>
+    </div>
   </div>
 </header>
 
@@ -649,6 +747,7 @@
           <p>Publicação, treinamento da equipe e suporte contínuo depois do lançamento.</p>
         </div>
       </div>
+      <div class="swipe-hint">arraste para o lado <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
     </div>
   </section>
 
@@ -770,6 +869,7 @@
           </div>
         </div>
       </div>
+      <div class="touch-hint">toque nos cards para ver cada um <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
     </div>
   </section>
 
