@@ -337,13 +337,6 @@
   .channel-left svg{flex:none;}
   .channel-left .cl-label{font-size:12px;color:var(--text-faint);}
   .channel-left .cl-value{font-size:15px;font-weight:600;font-family:'JetBrains Mono',monospace;overflow-wrap:anywhere;}
-  .copy-btn{
-    border:1px solid var(--line-strong);background:transparent;color:var(--text);
-    font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;
-    padding:9px 14px;border-radius:10px;cursor:pointer;white-space:nowrap;
-    transition:border-color .15s ease, color .15s ease;
-  }
-  .copy-btn:hover,.copy-btn.copied{border-color:var(--green-1);color:var(--green-2);}
   .form-note{font-size:13px;color:var(--text-faint);line-height:1.5;}
 
   #contact-form{position:relative;display:flex;flex-direction:column;gap:18px;}
@@ -822,23 +815,21 @@
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="#00E676"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 2-1.4.2-.7.2-1.2.1-1.4-.1-.1-.2-.2-.5-.3Z"/><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l4.9-1.4A10 10 0 1 0 12 2Zm0 18.2a8.1 8.1 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>
                 <div>
                   <div class="cl-label">WhatsApp</div>
-                  <div class="cl-value" data-copy="+55 66 99956-3473">+55 66 99956-3473</div>
+                  <div class="cl-value" id="whatsapp-number">+55 66 99956-3473</div>
                 </div>
               </div>
-              <button class="copy-btn" type="button" data-target="whatsapp">Copiar</button>
             </div>
             <div class="channel">
               <div class="channel-left">
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#00E676" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
                 <div>
                   <div class="cl-label">E-mail</div>
-                  <div class="cl-value" data-copy="palusolucoes@gmail.com">palusolucoes@gmail.com</div>
+                  <div class="cl-value">palusolucoes@gmail.com</div>
                 </div>
               </div>
-              <button class="copy-btn" type="button" data-target="email">Copiar</button>
             </div>
           </div>
-          <p class="form-note">Prefere falar direto? Copie um dos contatos acima e chame no seu app de mensagens.</p>
+          <p class="form-note">Prefere falar direto? Chama a gente no WhatsApp ou manda um e-mail.</p>
         </div>
 
         <form id="contact-form">
@@ -883,43 +874,9 @@
 
 <script>
 (function(){
-  document.querySelectorAll('.copy-btn').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var channel = btn.closest('.channel');
-      var valueEl = channel.querySelector('.cl-value');
-      var text = valueEl.getAttribute('data-copy') || valueEl.textContent;
-      var done = function(){
-        var original = btn.textContent;
-        btn.textContent = 'Copiado!';
-        btn.classList.add('copied');
-        setTimeout(function(){
-          btn.textContent = original;
-          btn.classList.remove('copied');
-        }, 1800);
-      };
-      if(navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(text).then(done).catch(function(){
-          selectText(valueEl);
-        });
-      } else {
-        selectText(valueEl);
-      }
-    });
-  });
-
-  function selectText(el){
-    var range = document.createRange();
-    range.selectNodeContents(el);
-    var sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(range);
-  }
-
   var form = document.getElementById('contact-form');
   var success = document.getElementById('form-success');
-  var whatsDigits = document.querySelector('[data-target="whatsapp"]')
-    .closest('.channel').querySelector('.cl-value')
-    .getAttribute('data-copy').replace(/\D/g, '');
+  var whatsDigits = document.getElementById('whatsapp-number').textContent.replace(/\D/g, '');
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
