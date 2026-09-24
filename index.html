@@ -4,7 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PALU Soluções Digitais</title>
-<meta name="description" content="A PALU projeta e constrói sites, aplicativos, sistemas e soluções com inteligência artificial.">
+<meta name="description" content="A PALU cria sites, aplicativos, sistemas e soluções com inteligência artificial. Fale direto com quem vai construir o seu projeto.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0B0F14">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="PALU Soluções Digitais">
+<meta property="og:url" content="https://paludigital.com.br/">
+<meta property="og:title" content="PALU Soluções Digitais">
+<meta property="og:description" content="Sites, aplicativos, sistemas e soluções com IA. Fale direto com quem vai construir o seu projeto.">
+<meta property="og:image" content="https://paludigital.com.br/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PALU Soluções Digitais — Tecnologia que conecta pessoas e oportunidades.">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
@@ -23,7 +39,9 @@
     color-scheme:dark;
   }
   *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:clip;}
   body{
+    -webkit-tap-highlight-color:transparent;
     margin:0;
     background:var(--bg);
     color:var(--text);
@@ -266,9 +284,11 @@
     transition:all .7s var(--ease);
     filter:grayscale(100%) brightness(0.6);
   }
-  .stack-card:hover{
-    transform:translate(var(--tx),var(--ty-h)) skewY(-8deg);
-    border-color:rgba(0,230,118,0.45);filter:none;z-index:10;
+  @media (hover:hover){
+    .stack-card:hover{
+      transform:translate(var(--tx),var(--ty-h)) skewY(-8deg);
+      border-color:rgba(0,230,118,0.45);filter:none;z-index:10;
+    }
   }
   .stack-card.back{--tx:0px;--ty:0rem;--ty-h:-3rem;z-index:1;}
   .stack-card.mid{--tx:clamp(1rem,5vw,5rem);--ty:3.5rem;--ty-h:0rem;z-index:2;}
@@ -365,7 +385,10 @@
     box-shadow:0 12px 32px -10px rgba(61,175,73,0.7),inset 0 1px 0 rgba(255,255,255,0.18);
     transition:transform .2s ease,box-shadow .2s ease;
   }
-  .wa-btn:hover{color:#FFFFFF;transform:translateY(-2px);box-shadow:0 18px 40px -10px rgba(61,175,73,0.85),inset 0 1px 0 rgba(255,255,255,0.18);}
+  .wa-btn:hover{color:#FFFFFF;}
+  @media (hover:hover){
+    .wa-btn:hover{transform:translateY(-2px);box-shadow:0 18px 40px -10px rgba(61,175,73,0.85),inset 0 1px 0 rgba(255,255,255,0.18);}
+  }
   .wa-btn svg{flex:none;}
   .mail-link{display:flex;align-items:center;gap:14px;min-width:0;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:16px 18px;}
   .mail-link:hover{border-color:var(--green-1);color:var(--text);}
@@ -461,8 +484,15 @@
   @keyframes nudge{0%,100%{transform:translateX(0);}50%{transform:translateX(5px);}}
   @keyframes menuIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:none;}}
 
+  @supports not (aspect-ratio:1/1){
+    .diagram{height:0;padding-top:78.01%;}
+    .phone-mock{height:534px;}
+  }
+
   /* touch devices: tap feedback instead of mouse tilt */
   @media (hover:none){
+    .field input,.field textarea{font-size:16px;}
+    .wa-btn:active{transform:scale(.98);}
     .tilt{transition:transform .15s ease, border-color .15s ease;}
     .tilt:active{transform:scale(.98);border-color:rgba(0,230,118,0.35);}
     .touch-hint{display:flex;}

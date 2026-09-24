@@ -2,6 +2,9 @@
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var canHover = window.matchMedia('(hover: hover)').matches;
 
+  // iOS Safari only applies :active styles when a touch listener exists
+  document.addEventListener('touchstart', function(){}, { passive:true });
+
   /* reveal on scroll */
   var revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
   if(!('IntersectionObserver' in window)){
