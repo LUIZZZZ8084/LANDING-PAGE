@@ -62,7 +62,7 @@
       idx = (idx + 1) % order.length;
       activate(order[idx]);
     }
-    function start(){ if(!timer && !userTook && !reduced){ step(); timer = setInterval(step, 2800); } }
+    function start(){ if(!timer && !userTook){ step(); timer = setInterval(step, 2800); } }
     function stop(){ clearInterval(timer); timer = null; }
     stackCards.forEach(function(card){
       card.addEventListener('click', function(){
