@@ -135,7 +135,7 @@
       name: String(fd.get('name') || '').trim(),
       contact: String(fd.get('contact') || '').trim(),
       message: String(fd.get('message') || '').trim(),
-      _subject: 'Novo contato pelo site — PALU',
+      _subject: 'Novo contato pelo site - PALU',
       _template: 'table',
       _captcha: 'false'
     };
@@ -156,7 +156,7 @@
         form.reset();
       })
       .catch(function(){
-        showStatus('Não foi possível enviar agora — abrimos seu e-mail para concluir.');
+        showStatus('Não foi possível enviar agora. Abrimos seu e-mail para concluir.');
         var body = 'Nome: ' + data.name + '\nContato: ' + data.contact + '\n\n' + data.message;
         window.location.href = 'mailto:palusolucoes@gmail.com?subject=' + encodeURIComponent(data._subject) + '&body=' + encodeURIComponent(body);
       })
