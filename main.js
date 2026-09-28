@@ -87,6 +87,7 @@
   var pctEl = document.querySelector('.progress-pct');
   var endPill = document.querySelector('.end-pill');
   var submitBtn = document.getElementById('submit-btn');
+  var footer = document.querySelector('footer');
   var atEnd = false;
 
   function onScroll(){
@@ -98,6 +99,9 @@
     sideFill.style.transform = 'scaleY(' + r + ')';
     sideLabel.style.top = (r * 100) + '%';
     pctEl.textContent = pct + '%';
+    // once the footer is on screen, lift the pill above it so it never covers the footer links
+    var lift = Math.max(0, window.innerHeight - footer.getBoundingClientRect().top);
+    endPill.style.transform = lift ? 'translateY(' + (-lift) + 'px)' : '';
     var now = pct >= 99;
     if(now !== atEnd){
       atEnd = now;
