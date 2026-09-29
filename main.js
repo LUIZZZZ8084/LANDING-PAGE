@@ -118,6 +118,30 @@
     setTimeout(function(){ submitBtn.focus(); }, 500);
   });
 
+  /* contact clicks -> PALU CRM (no cookies, no personal data: which button, page, source) */
+  function track(tipo){
+    try {
+      var q = new URLSearchParams(location.search);
+      var data = JSON.stringify({
+        tipo: tipo,
+        pagina: location.pathname,
+        referrer: document.referrer,
+        utm_source: q.get('utm_source'),
+        utm_medium: q.get('utm_medium'),
+        utm_campaign: q.get('utm_campaign'),
+        dispositivo: window.matchMedia('(max-width: 768px)').matches ? 'celular' : 'computador'
+      });
+      var url = 'https://palu-instagram-agent.horas-app.workers.dev/api/evento';
+      if (!(navigator.sendBeacon && navigator.sendBeacon(url, new Blob([data], { type: 'text/plain' })))) {
+        fetch(url, { method: 'POST', body: data, keepalive: true, mode: 'cors' }).catch(function(){});
+      }
+    } catch (e) {}
+  }
+  document.addEventListener('click', function(e){
+    var link = e.target.closest && e.target.closest('a[href*="wa.me/"]');
+    if (link) track('whatsapp');
+  });
+
   /* contact form -> FormSubmit */
   var form = document.getElementById('contact-form');
   var btnLabel = submitBtn.querySelector('.btn-label');
@@ -157,6 +181,7 @@
       .then(function(j){
         if(String(j.success) !== 'true') throw new Error('fail');
         showStatus('Mensagem enviada! Retornamos em até 48h.');
+        track('formulario');
         form.reset();
       })
       .catch(function(){
