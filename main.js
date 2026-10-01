@@ -53,30 +53,50 @@
     a.addEventListener('click', function(){ setMenu(false); });
   });
 
-  /* stacked cards on touch: tap to bring forward, auto-cycle while visible */
+  /* stacked cards: rise one by one on their own (every device), click/tap brings one forward.
+     Mouse over the stack pauses the cycle and hover takes over; it resumes when the pointer leaves. */
+  var stackEl = document.querySelector('.stack');
   var stackCards = Array.prototype.slice.call(document.querySelectorAll('.stack-card'));
-  if(!canHover && stackCards.length){
+  if(stackEl && stackCards.length){
     var order = [stackCards[2], stackCards[1], stackCards[0]];
-    var idx = -1, timer = null, userTook = false;
+    var idx = -1, timer = null, resumeTimer = null, visible = false, mouseInside = false;
     function activate(card){
+      stackEl.classList.toggle('cycling', !!card);
       stackCards.forEach(function(c){ c.classList.toggle('active', c === card); });
     }
     function step(){
       idx = (idx + 1) % order.length;
       activate(order[idx]);
     }
-    function start(){ if(!timer && !userTook){ step(); timer = setInterval(step, 2800); } }
-    function stop(){ clearInterval(timer); timer = null; }
+    function stop(){ clearInterval(timer); timer = null; clearTimeout(resumeTimer); }
+    function start(){ if(!timer && visible && !mouseInside){ step(); timer = setInterval(step, 3200); } }
+    function resumeLater(ms){
+      stop();
+      resumeTimer = setTimeout(function(){ start(); }, ms);
+    }
     stackCards.forEach(function(card){
       card.addEventListener('click', function(){
-        userTook = true; stop();
-        activate(card.classList.contains('active') ? null : card);
+        idx = order.indexOf(card);
+        activate(card);
+        resumeLater(8000);
       });
+      card.addEventListener('pointerenter', function(e){
+        if(e.pointerType === 'mouse'){ activate(null); }
+      });
+    });
+    stackEl.addEventListener('pointerenter', function(e){
+      if(e.pointerType === 'mouse'){ mouseInside = true; stop(); }
+    });
+    stackEl.addEventListener('pointerleave', function(e){
+      if(e.pointerType === 'mouse'){ mouseInside = false; resumeLater(1500); }
     });
     if('IntersectionObserver' in window){
       new IntersectionObserver(function(entries){
-        entries.forEach(function(e){ if(e.isIntersecting) start(); else stop(); });
-      }, { threshold:0.3 }).observe(document.querySelector('.stack'));
+        entries.forEach(function(e){
+          visible = e.isIntersecting;
+          if(visible) start(); else { stop(); activate(null); }
+        });
+      }, { threshold:0.3 }).observe(stackEl);
     }
   }
 

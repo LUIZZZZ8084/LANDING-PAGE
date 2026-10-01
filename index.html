@@ -486,11 +486,13 @@
   header.nav.open .menu-btn span::before{transform:translateY(6px) rotate(45deg);}
   header.nav.open .menu-btn span::after{transform:translateY(-6px) rotate(-45deg);}
 
-  /* stacked cards: tap / auto-cycle state mirrors hover */
+  /* stacked cards: auto-cycle / click state mirrors hover; while one is raised the others go grey */
   .stack-card.active{
     transform:translate(var(--tx),var(--ty-h)) skewY(-8deg);
     border-color:rgba(0,230,118,0.45);filter:none;z-index:10;
   }
+  .stack.cycling .stack-card:not(.active){filter:grayscale(100%) brightness(0.6);}
+  .stack-card{cursor:pointer;}
   .touch-hint{display:none;justify-content:center;align-items:center;gap:8px;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-3);}
   .touch-hint svg{animation:nudge 1.6s ease-in-out infinite;}
   .swipe-hint{display:none;align-items:center;gap:8px;margin-top:6px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-3);}
