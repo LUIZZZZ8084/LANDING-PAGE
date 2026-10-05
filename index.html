@@ -550,6 +550,12 @@
     .hero-ctas a{text-align:center;padding:18px 20px;}
     .btn-primary{box-shadow:0 12px 30px -10px rgba(124,255,58,0.5);}
 
+    /* the animated flow (PALU hub) moves above the "O que fazemos" heading, right under the hero cards */
+    #servicos{padding-top:28px;}
+    #servicos > .wrap{display:flex;flex-direction:column;}
+    #servicos .services-body{display:contents;}
+    #servicos .diagram{order:-1;margin-bottom:44px;}
+
     .diffs-m{display:block;padding-block:20px 12px;}
     .diff-cards{display:grid;gap:12px;}
     .diff{display:flex;flex-direction:column;gap:4px;padding:18px 20px;background:var(--bg-raised);border:1px solid var(--line);border-radius:18px;}
