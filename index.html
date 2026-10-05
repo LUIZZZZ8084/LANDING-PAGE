@@ -134,7 +134,8 @@
   .hero h1{font-size:clamp(40px,5.4vw,72px);line-height:1.04;font-weight:800;letter-spacing:-0.02em;}
   @media (min-width:1024px){
     .hero{grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:56px;}
-    .hero h1{font-size:clamp(38px,3.4vw,44px);line-height:1.08;}
+    .hero h1{font-size:clamp(44px,4.1vw,52px);line-height:1.06;}
+    .hero-sub{font-size:20px;}
     .hero h1 .accent{display:block;}
   }
   @media (min-width:1024px) and (max-width:1279px){
@@ -153,7 +154,7 @@
   .btn-primary:hover{background:var(--green-1);color:var(--bg);}
   .btn-ghost{padding:17px 30px;border-radius:14px;border:1.5px solid var(--line-strong);color:var(--text);font-weight:600;font-size:16px;}
   .btn-ghost:hover{border-color:var(--green-1);color:var(--text);}
-  .hl-m,.diffs-m{display:none;}
+  .diffs-m{display:none;}
   .metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding-top:28px;border-top:2px solid var(--line);}
   .metrics div{display:flex;flex-direction:column;gap:4px;}
   .metrics .num{font-size:24px;line-height:1.15;font-weight:800;color:var(--text);}
@@ -535,8 +536,6 @@
   /* ---------- phones ---------- */
   @media (max-width:560px){
     /* hero: headline, one line, one button. Panel, secondary button and numbers move out. */
-    .hl-d{display:none;}
-    .hl-m{display:block;}
     .hero{
       padding-block:32px 28px;min-height:460px;min-height:calc(100svh - 250px);
       align-content:center;
@@ -651,10 +650,10 @@
   <!-- HERO -->
   <div class="wrap hero">
     <div class="hero-content reveal">
-      <h1><span class="hl-d">Seu negócio tem uma ideia. <span class="accent">A gente ajuda a transformar ela em algo que funciona.</span></span><span class="hl-m">Você tem a ideia.<br><span class="accent">A gente faz acontecer.</span></span></h1>
+      <h1>Você tem a ideia.<br><span class="accent">A gente faz acontecer.</span></h1>
       <div class="bar-row">
         <div class="bar"></div>
-        <p class="hero-sub"><span class="hl-d">Não importa se você precisa de um site, sistema, aplicativo ou uma solução com IA. A PALU trabalha junto com você para entender o problema, encontrar o melhor caminho e construir algo que realmente faça sentido para o seu negócio.</span><span class="hl-m">Sites, sistemas e soluções digitais feitos para o seu negócio.</span></p>
+        <p class="hero-sub">Sites, sistemas e soluções digitais feitos para o seu negócio.</p>
       </div>
       <div class="hero-ctas">
         <a href="#contato" class="btn-primary">Quero tirar minha ideia do papel</a>
