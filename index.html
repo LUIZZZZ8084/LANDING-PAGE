@@ -153,6 +153,7 @@
   .btn-primary:hover{background:var(--green-1);color:var(--bg);}
   .btn-ghost{padding:17px 30px;border-radius:14px;border:1.5px solid var(--line-strong);color:var(--text);font-weight:600;font-size:16px;}
   .btn-ghost:hover{border-color:var(--green-1);color:var(--text);}
+  .hl-m,.diffs-m{display:none;}
   .metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding-top:28px;border-top:2px solid var(--line);}
   .metrics div{display:flex;flex-direction:column;gap:4px;}
   .metrics .num{font-size:24px;line-height:1.15;font-weight:800;color:var(--text);}
@@ -533,14 +534,28 @@
 
   /* ---------- phones ---------- */
   @media (max-width:560px){
-    .hero-content{gap:28px;}
-    .hero-sub{font-size:16px;}
+    /* hero: headline, one line, one button. Panel, secondary button and numbers move out. */
+    .hl-d{display:none;}
+    .hl-m{display:block;}
+    .hero{
+      padding-block:32px 28px;min-height:460px;min-height:calc(100svh - 250px);
+      align-content:center;
+    }
+    .hero-visual,.hero-secondary,.hero .metrics{display:none;}
+    .hero-content{gap:26px;}
+    .hero h1{font-size:clamp(34px,10.4vw,46px);line-height:1.06;letter-spacing:-0.025em;text-wrap:balance;}
+    .hero-sub{font-size:17px;line-height:1.55;max-width:26ch;}
     .bar-row{gap:16px;}
     .hero-ctas{flex-direction:column;}
-    .hero-ctas a{text-align:center;padding:16px 20px;}
-    .metrics{grid-template-columns:1fr;gap:14px;padding-top:22px;}
-    .metrics .num{font-size:20px;}
-    .metrics .lbl{font-size:13px;}
+    .hero-ctas a{text-align:center;padding:18px 20px;}
+    .btn-primary{box-shadow:0 12px 30px -10px rgba(124,255,58,0.5);}
+
+    .diffs-m{display:block;padding-block:20px 12px;}
+    .diff-cards{display:grid;gap:12px;}
+    .diff{display:flex;flex-direction:column;gap:4px;padding:18px 20px;background:var(--bg-raised);border:1px solid var(--line);border-radius:18px;}
+    .diff .num{font-size:22px;line-height:1.15;font-weight:800;color:var(--text);}
+    .diff .num.accent{color:var(--green-2);}
+    .diff .lbl{font-size:14px;line-height:1.45;color:var(--text-2);}
     .nav-cta{padding:10px 14px!important;font-size:13px;}
     .brand-mark{height:30px;}
     .brand-word{height:18px;}
@@ -573,8 +588,7 @@
   @media (max-width:400px){
     .cta-full{display:none;}
     .cta-short{display:inline;}
-    .hero h1{font-size:clamp(27px,8vw,34px);line-height:1.12;}
-    .hero-ctas a{font-size:15px;padding:16px 12px;}
+    .hero-ctas a{font-size:15px;padding:18px 12px;}
     .dg-node-box{width:46px;height:46px;border-radius:12px;}
     .dg-node-box svg{width:20px;height:20px;}
     .dg-node-label{top:52px;font-size:11px;}
@@ -584,6 +598,7 @@
   /* very small phones: the hero CTA sits right below, so the header one yields */
   @media (max-width:355px){
     .nav-cta{display:none;}
+    .hero-ctas a{font-size:14px;padding-inline:8px;}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -631,14 +646,14 @@
   <!-- HERO -->
   <div class="wrap hero">
     <div class="hero-content reveal">
-      <h1>Seu negócio tem uma ideia. <span class="accent">A gente ajuda a transformar ela em algo que funciona.</span></h1>
+      <h1><span class="hl-d">Seu negócio tem uma ideia. <span class="accent">A gente ajuda a transformar ela em algo que funciona.</span></span><span class="hl-m">Você tem a ideia.<br><span class="accent">A gente faz acontecer.</span></span></h1>
       <div class="bar-row">
         <div class="bar"></div>
-        <p class="hero-sub">Não importa se você precisa de um site, sistema, aplicativo ou uma solução com IA. A PALU trabalha junto com você para entender o problema, encontrar o melhor caminho e construir algo que realmente faça sentido para o seu negócio.</p>
+        <p class="hero-sub"><span class="hl-d">Não importa se você precisa de um site, sistema, aplicativo ou uma solução com IA. A PALU trabalha junto com você para entender o problema, encontrar o melhor caminho e construir algo que realmente faça sentido para o seu negócio.</span><span class="hl-m">Sites, sistemas e soluções digitais feitos para o seu negócio.</span></p>
       </div>
       <div class="hero-ctas">
         <a href="#contato" class="btn-primary">Quero tirar minha ideia do papel</a>
-        <a href="https://wa.me/5566999066380?text=Ol%C3%A1%2C%20PALU!%20Quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener" class="btn-ghost">Falar com a PALU</a>
+        <a href="https://wa.me/5566999066380?text=Ol%C3%A1%2C%20PALU!%20Quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener" class="btn-ghost hero-secondary">Falar com a PALU</a>
       </div>
       <div class="metrics">
         <div><span class="num accent">48h</span><span class="lbl">para receber uma primeira proposta</span></div>
@@ -677,6 +692,17 @@
       </div>
     </div>
   </div>
+
+  <!-- DIFERENCIAIS (celular): saem da hero e ficam logo abaixo dela -->
+  <section class="diffs-m" aria-label="Diferenciais">
+    <div class="wrap">
+      <div class="diff-cards reveal-stagger">
+        <div class="diff"><span class="num accent">48h</span><span class="lbl">para receber uma primeira proposta</span></div>
+        <div class="diff"><span class="num">Sem complicação</span><span class="lbl">você explica. A gente entende.</span></div>
+        <div class="diff"><span class="num">Sob medida</span><span class="lbl">uma solução pensada para o seu negócio</span></div>
+      </div>
+    </div>
+  </section>
 
   <!-- SERVICES -->
   <section id="servicos">
