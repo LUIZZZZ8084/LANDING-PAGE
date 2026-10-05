@@ -155,7 +155,7 @@
   .btn-ghost:hover{border-color:var(--green-1);color:var(--text);}
   .metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding-top:28px;border-top:2px solid var(--line);}
   .metrics div{display:flex;flex-direction:column;gap:4px;}
-  .metrics .num{font-size:30px;font-weight:800;color:var(--text);}
+  .metrics .num{font-size:24px;line-height:1.15;font-weight:800;color:var(--text);}
   .metrics .num.accent{color:var(--green-2);}
   .metrics .lbl{font-size:13px;color:var(--text-3);font-weight:500;}
 
@@ -538,9 +538,9 @@
     .bar-row{gap:16px;}
     .hero-ctas{flex-direction:column;}
     .hero-ctas a{text-align:center;padding:16px 20px;}
-    .metrics{gap:12px;padding-top:22px;}
-    .metrics .num{font-size:24px;}
-    .metrics .lbl{font-size:12px;}
+    .metrics{grid-template-columns:1fr;gap:14px;padding-top:22px;}
+    .metrics .num{font-size:20px;}
+    .metrics .lbl{font-size:13px;}
     .nav-cta{padding:10px 14px!important;font-size:13px;}
     .brand-mark{height:30px;}
     .brand-word{height:18px;}
@@ -571,8 +571,7 @@
 
   @media (max-width:400px){
     .hero h1{font-size:clamp(27px,8vw,34px);line-height:1.12;}
-    .metrics{gap:8px;}
-    .metrics .num{font-size:20px;}
+    .hero-ctas a{font-size:15px;padding:16px 12px;}
     .dg-node-box{width:46px;height:46px;border-radius:12px;}
     .dg-node-box svg{width:20px;height:20px;}
     .dg-node-label{top:52px;font-size:11px;}
@@ -582,7 +581,6 @@
   /* very small phones: the hero CTA sits right below, so the header one yields */
   @media (max-width:350px){
     .nav-cta{display:none;}
-    .metrics .num{font-size:17px;}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -630,19 +628,19 @@
   <!-- HERO -->
   <div class="wrap hero">
     <div class="hero-content reveal">
-      <h1>Do primeiro rascunho ao produto no ar, <span class="accent">com quem desenha e programa junto com você.</span></h1>
+      <h1>Seu negócio tem uma ideia. <span class="accent">A gente ajuda a transformar ela em algo que funciona.</span></h1>
       <div class="bar-row">
         <div class="bar"></div>
-        <p class="hero-sub">Sites, aplicativos, sistemas e soluções com IA para o seu negócio. Você conta a ideia e, em até 48 horas, a nossa equipe volta com proposta e prévia.</p>
+        <p class="hero-sub">Não importa se você precisa de um site, sistema, aplicativo ou uma solução com IA. A PALU trabalha junto com você para entender o problema, encontrar o melhor caminho e construir algo que realmente faça sentido para o seu negócio.</p>
       </div>
       <div class="hero-ctas">
-        <a href="#contato" class="btn-primary">Quero uma proposta</a>
-        <a href="https://wa.me/5566999066380?text=Ol%C3%A1%2C%20PALU!%20Quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener" class="btn-ghost">Falar no WhatsApp</a>
+        <a href="#contato" class="btn-primary">Quero tirar minha ideia do papel</a>
+        <a href="https://wa.me/5566999066380?text=Ol%C3%A1%2C%20PALU!%20Quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener" class="btn-ghost">Falar com a PALU</a>
       </div>
       <div class="metrics">
-        <div><span class="num accent">48h</span><span class="lbl">para proposta e prévia</span></div>
-        <div><span class="num">Prévia</span><span class="lbl">antes de programar</span></div>
-        <div><span class="num">Suporte</span><span class="lbl">depois do lançamento</span></div>
+        <div><span class="num accent">48h</span><span class="lbl">para receber uma primeira proposta</span></div>
+        <div><span class="num">Sem complicação</span><span class="lbl">você explica. A gente entende.</span></div>
+        <div><span class="num">Sob medida</span><span class="lbl">uma solução pensada para o seu negócio</span></div>
       </div>
     </div>
 
