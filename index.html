@@ -569,7 +569,10 @@
     .crm-lead .st{padding:1px 5px;}
   }
 
+  .cta-short{display:none;}
   @media (max-width:400px){
+    .cta-full{display:none;}
+    .cta-short{display:inline;}
     .hero h1{font-size:clamp(27px,8vw,34px);line-height:1.12;}
     .hero-ctas a{font-size:15px;padding:16px 12px;}
     .dg-node-box{width:46px;height:46px;border-radius:12px;}
@@ -579,7 +582,7 @@
   }
 
   /* very small phones: the hero CTA sits right below, so the header one yields */
-  @media (max-width:350px){
+  @media (max-width:355px){
     .nav-cta{display:none;}
   }
 
@@ -617,7 +620,7 @@
         <a href="#projetos">LUPA</a>
         <a href="#sobre">Sobre</a>
       </nav>
-      <a href="#contato" class="nav-cta">Iniciar projeto</a>
+      <a href="#contato" class="nav-cta"><span class="cta-full">Tirar ideia do papel</span><span class="cta-short">Tirar do papel</span></a>
       <button class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-menu"><span></span></button>
     </div>
   </div>
