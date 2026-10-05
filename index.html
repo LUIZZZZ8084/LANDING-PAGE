@@ -551,12 +551,11 @@
     .btn-primary{box-shadow:0 12px 30px -10px rgba(124,255,58,0.5);}
 
     /* the animated flow (PALU hub) moves above the "O que fazemos" heading, right under the hero cards */
-    #servicos{padding-top:28px;}
+    #servicos{padding-top:24px;}
     #servicos > .wrap{display:flex;flex-direction:column;}
     #servicos .services-body{display:contents;}
-    #servicos .diagram{order:-1;margin-bottom:44px;}
-
-    .diffs-m{display:block;padding-block:20px 12px;}
+    #servicos .diagram{order:-2;margin-bottom:28px;}
+    .diffs-m{display:block;order:-1;margin-bottom:36px;}
     .diff-cards{display:grid;gap:12px;}
     .diff{display:flex;flex-direction:column;gap:4px;padding:18px 20px;background:var(--bg-raised);border:1px solid var(--line);border-radius:18px;}
     .diff .num{font-size:22px;line-height:1.15;font-weight:800;color:var(--text);}
@@ -699,20 +698,17 @@
     </div>
   </div>
 
-  <!-- DIFERENCIAIS (celular): saem da hero e ficam logo abaixo dela -->
-  <section class="diffs-m" aria-label="Diferenciais">
-    <div class="wrap">
-      <div class="diff-cards reveal-stagger">
-        <div class="diff"><span class="num accent">48h</span><span class="lbl">para receber uma primeira proposta</span></div>
-        <div class="diff"><span class="num">Sem complicação</span><span class="lbl">você explica. A gente entende.</span></div>
-        <div class="diff"><span class="num">Sob medida</span><span class="lbl">uma solução pensada para o seu negócio</span></div>
-      </div>
-    </div>
-  </section>
-
   <!-- SERVICES -->
   <section id="servicos">
     <div class="wrap">
+      <!-- DIFERENCIAIS (celular): ficam abaixo do fluxo animado, antes do título da seção -->
+      <div class="diffs-m">
+        <div class="diff-cards reveal-stagger">
+          <div class="diff"><span class="num accent">48h</span><span class="lbl">para receber uma primeira proposta</span></div>
+          <div class="diff"><span class="num">Sem complicação</span><span class="lbl">você explica. A gente entende.</span></div>
+          <div class="diff"><span class="num">Sob medida</span><span class="lbl">uma solução pensada para o seu negócio</span></div>
+        </div>
+      </div>
       <div class="section-head reveal">
         <div class="head-left">
           <span class="eyebrow">O que fazemos</span>
