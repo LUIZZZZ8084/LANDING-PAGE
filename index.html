@@ -108,6 +108,14 @@
   .end-pill:hover{background:var(--green-2);color:var(--bg);}
   .reached-end .end-pill{display:flex;}
 
+  /* ---------- skip link ---------- */
+  .skip-link{
+    position:fixed;top:-100px;left:16px;z-index:100;
+    background:var(--green-2);color:var(--bg);font-weight:700;font-size:14px;
+    padding:12px 20px;border-radius:10px;text-decoration:none;transition:top .2s ease;
+  }
+  .skip-link:focus-visible{top:16px;}
+
   /* ---------- header ---------- */
   header.nav{
     position:sticky;top:0;z-index:40;
@@ -296,7 +304,7 @@
     grid-area:stack;width:min(22rem,64vw);background:var(--bg-raised);border:1px solid var(--line);border-radius:22px;
     overflow:hidden;box-shadow:0 30px 60px -24px rgba(0,0,0,0.8);
     transform:translate(var(--tx),var(--ty)) skewY(-8deg);
-    transition:all .7s var(--ease);
+    transition:transform .7s var(--ease), filter .7s var(--ease), border-color .7s var(--ease);
     filter:grayscale(100%) brightness(0.6);
   }
   @media (hover:hover){
@@ -612,6 +620,8 @@
 </head>
 <body>
 
+<a href="#top" class="skip-link">Pular para o conteúdo</a>
+
 <div class="bg-layer" aria-hidden="true">
   <div class="bg-dots"></div>
   <div class="bg-blob bg-blob-1"></div>
@@ -628,8 +638,8 @@
 <header class="nav">
   <div class="wrap nav-row">
     <a href="#top" class="brand" aria-label="PALU Soluções Digitais">
-      <img src="assets/palu-mark.png" alt="" class="brand-mark">
-      <img src="assets/palu-word.png" alt="PALU" class="brand-word">
+      <img src="assets/palu-mark.png" width="190" height="200" alt="" class="brand-mark">
+      <img src="assets/palu-word.png" width="440" height="110" alt="PALU" class="brand-word">
     </a>
     <div class="nav-right">
       <nav class="links" id="site-menu">
@@ -670,9 +680,9 @@
         <div class="panel-glow"></div>
         <div class="panel-inner">
           <div class="panel-brand">
-            <img src="assets/palu-mark.png" alt="" class="panel-mark">
+            <img src="assets/palu-mark.png" width="190" height="200" alt="" class="panel-mark">
             <div class="panel-brand-text">
-              <img src="assets/palu-word.png" alt="PALU" class="panel-word">
+              <img src="assets/palu-word.png" width="440" height="110" alt="PALU" class="panel-word">
               <span class="panel-sub">Soluções Digitais</span>
             </div>
           </div>
@@ -731,7 +741,7 @@
               <path class="dg-flow d3" d="M 294 205 V 315 Q 294 330 309 330 H 454"/>
             </svg>
             <div class="dg-hub">
-              <div class="dg-hub-inner"><img src="assets/palu-mark.png" alt=""></div>
+              <div class="dg-hub-inner"><img src="assets/palu-mark.png" width="190" height="200" alt=""></div>
               <div class="dg-hub-ring"></div>
             </div>
             <div class="dg-node n-tl">
@@ -965,14 +975,14 @@
       </div>
       <div class="founders reveal-stagger">
         <div class="founder-card tilt">
-          <img src="assets/luiz-3.jpg" alt="Luiz Alvarenga Finger" class="founder-photo c1">
+          <img src="assets/luiz-3.jpg" width="540" height="540" alt="Luiz Alvarenga Finger" class="founder-photo c1" loading="lazy">
           <div class="founder-copy">
             <h4>Luiz Alvarenga Finger</h4>
             <span class="founder-role">Sócio-fundador · Produto, Projetos &amp; IA</span>
           </div>
         </div>
         <div class="founder-card tilt">
-          <img src="assets/paulinho.jpg" alt="Paulinho Junior Lanius" class="founder-photo c2">
+          <img src="assets/paulinho.jpg" width="872" height="829" alt="Paulinho Junior Lanius" class="founder-photo c2" loading="lazy">
           <div class="founder-copy">
             <h4>Paulinho Junior Lanius</h4>
             <span class="founder-role">Sócio-fundador · Arquitetura, Backend &amp; Segurança</span>
@@ -1008,10 +1018,10 @@
             <input id="f-name" name="name" type="text" placeholder="Como podemos te chamar?" autocomplete="name" required>
           </label>
           <label class="field">E-mail ou WhatsApp
-            <input id="f-contact" name="contact" type="text" placeholder="seu@email.com" required>
+            <input id="f-contact" name="contact" type="text" placeholder="seu@email.com" autocomplete="email" required>
           </label>
           <label class="field">Sobre o projeto
-            <textarea id="f-msg" name="message" placeholder="Conte um pouco sobre o que você precisa..." required></textarea>
+            <textarea id="f-msg" name="message" placeholder="Conte um pouco sobre o que você precisa…" required></textarea>
           </label>
           <label class="hp" aria-hidden="true">Não preencha
             <input id="f-honey" name="_honey" type="text" tabindex="-1" autocomplete="off">
@@ -1037,8 +1047,8 @@
 <footer>
   <div class="wrap foot-row">
     <a href="#top" class="brand" aria-label="PALU Soluções Digitais">
-      <img src="assets/palu-mark.png" alt="" class="brand-mark">
-      <img src="assets/palu-word.png" alt="PALU" class="brand-word">
+      <img src="assets/palu-mark.png" width="190" height="200" alt="" class="brand-mark">
+      <img src="assets/palu-word.png" width="440" height="110" alt="PALU" class="brand-word">
     </a>
     <span class="foot-tag">Tecnologia que conecta pessoas e oportunidades.</span>
     <nav class="foot-links">

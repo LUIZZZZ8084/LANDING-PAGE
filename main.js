@@ -189,7 +189,7 @@
     };
     sending = true;
     submitBtn.disabled = true;
-    btnLabel.textContent = 'Enviando...';
+    btnLabel.textContent = 'Enviando…';
     status.hidden = true;
 
     fetch('https://formsubmit.co/ajax/palusolucoes@gmail.com', {
